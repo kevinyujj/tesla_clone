@@ -9,7 +9,7 @@ import { toggle } from '../features/car/sidebarSlice'
 
 function Header() {
 
-    const [sidebar, setSidebar] = useState(false)
+    // const [sidebar, setSidebar] = useState(false)
     const mybar = useSelector((state) => 
         state.sidebar.value.open
     )
@@ -22,7 +22,7 @@ function Header() {
             <a>
                 <img src="/images/logo.svg" alt='logo'/>
             </a>
-            <Menu>
+            <Menu toggle = {mybar}>
                 <a href='#'>Model S</a>
                 <a href='#'>Model 3</a>
                 <a href='#'>Model X</a>
@@ -81,6 +81,7 @@ const Menu = styled.div`
     align-items: center;
     justify-content: center;
     flex: 1;
+    filter:${props => props.toggle? 'blur(4px)':'blur(0)'};
     a {
         font-weight: 600;
         text-transform: uppercase;
