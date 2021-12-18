@@ -24,7 +24,7 @@ function Header() {
             </Menu>
             <RightMenu>
                 <a href='#'>Shop</a>
-                <a href='#'>Tesla Account</a>
+                <a href='#'>Account</a>
                 <CustomMenu onClick={() => setSidebar(true)}/>
             </RightMenu>
 
@@ -92,6 +92,10 @@ const RightMenu = styled.div`
         font-weight: 600;
         text-transform: uppercase;
         margin-right: 10px;
+
+        @media(max-width: 768px){
+            display: none;
+        }
     }
 `
 
