@@ -1,8 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
+// import { selectCars } from '../features/car/carSlice'
+// import { useSelector } from 'react-redux'
 
 function Header() {
+
+    const [sidebar, setSidebar] = useState(false)
+    // const cars = useSelector(selectCars)
+    // console.log(cars)
+
     return (
         <Container>
             <a>
@@ -17,8 +25,30 @@ function Header() {
             <RightMenu>
                 <a href='#'>Shop</a>
                 <a href='#'>Tesla Account</a>
-                <CustomMenu />
+                <CustomMenu onClick={() => setSidebar(true)}/>
             </RightMenu>
+
+                <BurgerNav show={sidebar}>
+                    <CloseWrapper>
+                        <CustomClose onClick={() => setSidebar(false)}/>
+                    </CloseWrapper>
+                    <li><a href='#'>Existing Inventory</a></li>
+                    <li><a href='#'>Used Inventory</a></li>
+                    <li><a href='#'>Trade-In</a></li>
+                    <li><a href='#'>Test Driving</a></li>
+                    <li><a href='#'>Powerwall</a></li>
+                    <li><a href='#'>Energy</a></li>
+                    <li><a href='#'>Commercial Energy</a></li>
+                    <li><a href='#'>Utilities</a></li>
+                    <li><a href='#'>Charging</a></li>
+                    <li><a href='#'>Find Us</a></li>
+                    <li><a href='#'>Support</a></li>
+                    <li><a href='#'>Investor Ralations</a></li>
+                    <li><a href='#'>Shop</a></li>
+                    <li><a href='#'>Account</a></li>
+                    <li><a href='#'>More</a></li>
+                </BurgerNav>
+ 
         </Container>
     )
 }
@@ -26,6 +56,7 @@ function Header() {
 export default Header
 
 const Container = styled.div`
+    z-index: 1;
     min-height: 60px;
     position: fixed;
     display: flex;
@@ -66,4 +97,45 @@ const RightMenu = styled.div`
 
 const CustomMenu = styled(MenuIcon)`
     cursor: pointer;
+`
+
+const BurgerNav = styled.div`
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    width: 300px;
+    list-style: none;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transform: ${props => props.show? 'traslateX(0)':'translateX(100%)'};
+    transition: transform 0.2s;
+    
+    li{
+        padding: 15px 10px;
+        border-bottom: 1;
+        border-radius: 2em;
+        margin-top: 5px;
+
+        a{
+            font-weight: 600;
+            font-size: 0.5em;
+        }
+    }
+
+    li:hover{
+        background-color: lightgray;
+        cursor:pointer;
+    }
+`
+
+const CustomClose = styled(CloseIcon)`
+    cursor: pointer;
+`
+
+const CloseWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
 `
