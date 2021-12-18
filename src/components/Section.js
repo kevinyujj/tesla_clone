@@ -1,10 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import Fade from 'react-reveal/Fade';
+import { useSelector } from 'react-redux'
 
 function Section({title,description,backgroundImg,leftBtnText,rightBtnText}) {
+
+    const mybar = useSelector((state) => 
+      state.sidebar.value.open
+    )
+
     return (
-        <Wrap bgImage = {backgroundImg}>
+        <Wrap bgImage = {backgroundImg} toggle = {mybar}>
           <Fade bottom>
             <ItemText>
               <h1>{title}</h1>
@@ -39,6 +45,7 @@ const Wrap = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-image: ${props => `url("/images/${props.bgImage}")`};
+    filter:${props => props.toggle? 'blur(4px)':'blur(0)'};
     display: flex;
     flex-direction: column;
     justify-content: space-between;

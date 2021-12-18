@@ -2,12 +2,18 @@ import React, {useState} from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-// import { selectCars } from '../features/car/carSlice'
-// import { useSelector } from 'react-redux'
+import { selectCars } from '../features/car/carSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggle } from '../features/car/sidebarSlice'
+
 
 function Header() {
 
     const [sidebar, setSidebar] = useState(false)
+    const mybar = useSelector((state) => 
+        state.sidebar.value.open
+    )
+    const dispatch = useDispatch();
     // const cars = useSelector(selectCars)
     // console.log(cars)
 
@@ -25,12 +31,14 @@ function Header() {
             <RightMenu>
                 <a href='#'>Shop</a>
                 <a href='#'>Account</a>
-                <CustomMenu onClick={() => setSidebar(true)}/>
+                {/* <CustomMenu onClick={() => setSidebar(true)}/> */}
+                <CustomMenu onClick={() => {dispatch(toggle({open:true}))}}/>
             </RightMenu>
 
-                <BurgerNav show={sidebar}>
+                <BurgerNav show={mybar}>
                     <CloseWrapper>
-                        <CustomClose onClick={() => setSidebar(false)}/>
+                        {/* <CustomClose onClick={() => setSidebar(false)}/> */}
+                        <CustomClose onClick={() => {dispatch(toggle({open:false}))}}/>
                     </CloseWrapper>
                     <li><a href='#'>Existing Inventory</a></li>
                     <li><a href='#'>Used Inventory</a></li>
